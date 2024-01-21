@@ -2,44 +2,48 @@ package pl.foodoutlet.foodoutlet.controller;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import pl.foodoutlet.foodoutlet.model.FoodOutlet;
+import pl.foodoutlet.foodoutlet.service.OutletService;
 
 @RestController
+@RequestMapping("/api/outlets")
 public class OutletController {
 
-    private List<FoodOutlet> mock = List.of(new FoodOutlet("PizzaHut", "Poznan", "American", "14:00-22:00"));
+    @Autowired
+    private OutletService outletService;
 
-    @GetMapping("/")
-    public String hello() {
-        return "Hello world";
+    @PostMapping
+    public FoodOutlet createFoodOutlet(FoodOutlet outlet) {
+        return outletService.createOutlet(outlet);
     }
 
-    @GetMapping("/outlets")
-    public List<FoodOutlet> get() {
-        return mock;
+    @GetMapping
+    public List<FoodOutlet> getAllOutlets() {
+        return outletService.getAllOutlets();
     }
 
-    @GetMapping("/outlets/{id}")
-    public FoodOutlet get(@PathVariable String id) {
-
-        try {
-            FoodOutlet outlet = mock.get(Integer.parseInt(id));
-
-            if (outlet == null) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-            }
-
-            return outlet;
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-
+    @GetMapping("/{id}")
+    public FoodOutlet getOutletById(@PathVariable int id) {
+        return outletService.getOutletById(id);
     }
 
+    @PutMapping("/{id}")
+    public FoodOutlet updateOutlet(@PathVariable int id, @RequestBody FoodOutlet outlet) {
+        return outletService.updateOutlet(id, outlet);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteOutlet(@PathVariable int id) {
+        outletService.deleteOutlet(id);
+    }
 }
