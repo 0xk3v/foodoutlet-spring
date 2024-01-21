@@ -95,4 +95,8 @@ public class FoodOutlet {
 
                 return (double) totalRating / ratings.size();
         }
+
+        public void setId(Integer id) {
+                this.id = id;
+        }
 }
