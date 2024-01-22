@@ -3,6 +3,13 @@ package pl.foodoutlet.foodoutlet.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+/**
+ * Creates a table to store Ratings for FoodOutlet Class.
+ * 
+ * @author Kévin
+ *
+ */
+
 @Entity
 @Table(name = "rating_review")
 public class Rating {
