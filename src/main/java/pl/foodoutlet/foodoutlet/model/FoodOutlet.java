@@ -1,9 +1,9 @@
 package pl.foodoutlet.foodoutlet.model;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "food_outlet")
@@ -11,22 +11,27 @@ public class FoodOutlet {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
-        private Integer id;
+        private Long id;
 
+        @NotEmpty
         @Column(name = "name")
         private String name;
 
+        @NotEmpty
         @Column(name = "address")
         private String address;
 
+        @NotEmpty
         @Column(name = "cuisine_type")
         private String cuisineType;
 
         @Column(name = "opening_hours")
         private String openingHours;
 
-        @OneToMany(mappedBy = "foodOutlet", cascade = CascadeType.ALL)
-        private List<Rating> ratings = new ArrayList<>();
+        // One-to-Many relationship: One FoodOutlet to Many Ratings
+        @OneToMany(mappedBy = "foodOutlet", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+        @JsonManagedReference
+        private List<Rating> ratings;;
 
         public FoodOutlet() {
         }
@@ -36,11 +41,14 @@ public class FoodOutlet {
                 this.address = address;
                 this.cuisineType = cuisineType;
                 this.openingHours = openingHours;
-                this.ratings = new ArrayList<>();
         }
 
-        public int getId() {
+        public Long getId() {
                 return id;
+        }
+
+        public void setId(Long id) {
+                this.id = id;
         }
 
         public String getName() {
@@ -79,24 +87,8 @@ public class FoodOutlet {
                 return ratings;
         }
 
-        public void addRating(Rating rating) {
-                ratings.add(rating);
+        public void setRatings(List<Rating> ratings) {
+                this.ratings = ratings;
         }
 
-        public double calculateAverageRating() {
-                if (ratings.isEmpty()) {
-                        return 0.0;
-                }
-
-                int totalRating = 0;
-                for (Rating rating : ratings) {
-                        totalRating += rating.getRating();
-                }
-
-                return (double) totalRating / ratings.size();
-        }
-
-        public void setId(Integer id) {
-                this.id = id;
-        }
 }
