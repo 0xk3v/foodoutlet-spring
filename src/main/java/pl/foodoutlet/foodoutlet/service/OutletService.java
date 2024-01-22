@@ -22,16 +22,19 @@ public class OutletService {
         return outletRepo.findAll();
     }
 
-    public FoodOutlet getOutletById(int id) {
+    public FoodOutlet getOutletById(Long id) {
         return outletRepo.findById(id).orElse(null);
     }
 
-    public FoodOutlet updateOutlet(Integer id, FoodOutlet outlet) {
-        outlet.setId(id);
-        return outletRepo.save(outlet);
+    public FoodOutlet updateOutlet(Long id, FoodOutlet outlet) {
+        if (outletRepo.existsById(id)) {
+            outlet.setId(id);
+            return outletRepo.save(outlet);
+        }
+        return null;
     }
 
-    public void deleteOutlet(int id) {
+    public void deleteOutlet(Long id) {
         outletRepo.deleteById(id);
     }
 
