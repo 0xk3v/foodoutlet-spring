@@ -10,6 +10,14 @@ import pl.foodoutlet.foodoutlet.model.Rating;
 import pl.foodoutlet.foodoutlet.repository.FoodOutletRepo;
 import pl.foodoutlet.foodoutlet.repository.RatingRepo;
 
+/**
+ * Rating Service:
+ * 
+ * used to query the Database through Rating Repository
+ * 
+ * @author Kévin
+ *
+ */
 @Service
 public class RatingService {
 
@@ -36,7 +44,6 @@ public class RatingService {
             Rating rating = new Rating(ratingValue, foodOutlet);
             return ratingRepo.save(rating);
         }
-        // System.out.println(foodOutlet.getName());
         return null;
     }
 
