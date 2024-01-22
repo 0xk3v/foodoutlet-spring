@@ -17,12 +17,12 @@ import pl.foodoutlet.foodoutlet.schema.RatingSchema;
 import pl.foodoutlet.foodoutlet.service.RatingService;
 
 /**
- * SpringBoot Controller to Manage Rating
- * 
- * @author Kévin
+ * Controller class for managing ratings in the Food Outlets Rating System.
+ * Provides endpoints for CRUD operations on ratings.
  *
+ * @author Kévin
+ * @version 1.0
  */
-
 @RestController
 @RequestMapping("/api/ratings")
 public class RatingController {
@@ -31,12 +31,11 @@ public class RatingController {
     private RatingService ratingService;
 
     /**
-     * Calls Rating Service to create a new Rating
-     * 
-     * @param ratingRequest
-     * @return A created Rating
-     * @author Kévin
+     * Creates a new rating for a food outlet.
      *
+     * @param ratingRequest The request payload containing rating and foodOutletId.
+     * @return The created Rating entity.
+     * @author Kévin
      */
 
     @PostMapping
@@ -58,14 +57,13 @@ public class RatingController {
     }
 
     /**
-     * Calls Rating Service to Fetch all Ratings from the Database
-     * 
-     * @param id
-     * @return A Single Rating based on provided param
+     * Retrieves a specific rating by its ID.
+     *
+     * @param id The ID of the rating to retrieve.
+     * @return The Rating entity if found, or null if not found.
      * @author Kévin
-     * 
+     *
      */
-
     @GetMapping("/{id}")
     public Rating getRatingById(@PathVariable Long id) {
         return ratingService.getRatingById(id);
