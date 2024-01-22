@@ -16,6 +16,13 @@ public class RatingController {
     @Autowired
     private RatingService ratingService;
 
+    /**
+     * Calls Rating Service to create a new Rating
+     * 
+     * @param ratingRequest
+     * @return A created user with type Rating
+     * @author Kévin
+     */
     @PostMapping
     public Rating createRating(@RequestBody RatingSchema ratingRequest) {
         return ratingService.createRating(ratingRequest.getRating(), ratingRequest.getFoodOutletId());
