@@ -1,5 +1,11 @@
 package pl.foodoutlet.foodoutlet.schema;
 
+/**
+ * Creates a schema for Request Body object used by Rating Controller
+ * 
+ * @author Kévin
+ *
+ */
 public class RatingSchema {
 
     private int rating;
