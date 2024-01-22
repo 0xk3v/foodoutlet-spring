@@ -1,5 +1,6 @@
 package pl.foodoutlet.foodoutlet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -7,18 +8,17 @@ import jakarta.persistence.*;
 public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "rating")
     private int rating;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "food_outlet_id")
+    @JsonIgnore
     private FoodOutlet foodOutlet;
 
     public Rating() {
-        // Default constructor required by Hibernate
     }
 
     public Rating(int rating, FoodOutlet foodOutlet) {
@@ -26,7 +26,7 @@ public class Rating {
         this.foodOutlet = foodOutlet;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -38,8 +38,16 @@ public class Rating {
         this.rating = rating;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public FoodOutlet getFoodOutlet() {
         return foodOutlet;
+    }
+
+    public Long getFoodOutletId() {
+        return this.foodOutlet.getId();
     }
 
     public void setFoodOutlet(FoodOutlet foodOutlet) {
