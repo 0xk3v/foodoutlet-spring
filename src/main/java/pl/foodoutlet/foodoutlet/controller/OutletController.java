@@ -3,14 +3,7 @@ package pl.foodoutlet.foodoutlet.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import pl.foodoutlet.foodoutlet.model.FoodOutlet;
 import pl.foodoutlet.foodoutlet.service.OutletService;
@@ -23,7 +16,7 @@ public class OutletController {
     private OutletService outletService;
 
     @PostMapping
-    public FoodOutlet createFoodOutlet(FoodOutlet outlet) {
+    public FoodOutlet createFoodOutlet(@RequestBody FoodOutlet outlet) {
         return outletService.createOutlet(outlet);
     }
 
@@ -33,17 +26,17 @@ public class OutletController {
     }
 
     @GetMapping("/{id}")
-    public FoodOutlet getOutletById(@PathVariable int id) {
+    public FoodOutlet getOutletById(@PathVariable Long id) {
         return outletService.getOutletById(id);
     }
 
     @PutMapping("/{id}")
-    public FoodOutlet updateOutlet(@PathVariable int id, @RequestBody FoodOutlet outlet) {
+    public FoodOutlet updateOutlet(@PathVariable Long id, @RequestBody FoodOutlet outlet) {
         return outletService.updateOutlet(id, outlet);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteOutlet(@PathVariable int id) {
+    public void deleteOutlet(@PathVariable Long id) {
         outletService.deleteOutlet(id);
     }
 }
