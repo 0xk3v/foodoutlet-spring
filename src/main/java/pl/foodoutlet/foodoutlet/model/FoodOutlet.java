@@ -1,8 +1,12 @@
 package pl.foodoutlet.foodoutlet.model;
 
 import java.util.List;
+
 import jakarta.persistence.*;
+
 import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.URL;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -27,6 +31,10 @@ public class FoodOutlet {
 
         @Column(name = "opening_hours")
         private String openingHours;
+
+        @URL
+        @Column(name = "image_url")
+        private String imageUrl;
 
         // One-to-Many relationship: One FoodOutlet to Many Ratings
         @OneToMany(mappedBy = "foodOutlet", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -81,6 +89,14 @@ public class FoodOutlet {
 
         public void setOpeningHours(String openingHours) {
                 this.openingHours = openingHours;
+        }
+
+        public String getImageUrl() {
+                return imageUrl;
+        }
+
+        public void setImageUrl(String imageUrl) {
+                this.imageUrl = imageUrl;
         }
 
         public List<Rating> getRatings() {
