@@ -3,6 +3,7 @@ package pl.foodoutlet.foodoutlet.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,61 +23,65 @@ import pl.foodoutlet.foodoutlet.service.RatingService;
  *
  * @author Kévin
  * @version 1.0
+ *
  */
+
+@CrossOrigin(origins = "http://localhost:5173/")
 @RestController
 @RequestMapping("/api/ratings")
 public class RatingController {
 
-    @Autowired
-    private RatingService ratingService;
+  @Autowired
+  private RatingService ratingService;
 
-    /**
-     * Creates a new rating for a food outlet.
-     *
-     * @param ratingRequest The request payload containing rating and foodOutletId.
-     * @return The created Rating entity.
-     * @author Kévin
-     */
+  /**
+   * Creates a new rating for a food outlet.
+   *
+   * @param ratingRequest The request payload containing rating and foodOutletId.
+   * @return The created Rating entity.
+   * @author Kévin
+   *
+   */
 
-    @PostMapping
-    public Rating createRating(@RequestBody RatingSchema ratingRequest) {
-        return ratingService.createRating(ratingRequest.getRating(), ratingRequest.getFoodOutletId());
-    }
+  @PostMapping
+  public Rating createRating(@RequestBody RatingSchema ratingRequest) {
+    return ratingService.createRating(ratingRequest.getRating(), ratingRequest.getFoodOutletId());
+  }
 
-    /**
-     * Calls Rating Service to Fetch all Ratings from the Database
-     * 
-     * @return A List of all Ratings
-     * @author Kévin
-     *
-     */
+  /**
+   * Calls Rating Service to Fetch all Ratings from the Database
+   * 
+   * @return A List of all Ratings
+   * @author Kévin
+   *
+   */
 
-    @GetMapping
-    public List<Rating> getAllRatings() {
-        return ratingService.getAllRatings();
-    }
+  @GetMapping
+  public List<Rating> getAllRatings() {
+    return ratingService.getAllRatings();
+  }
 
-    /**
-     * Retrieves a specific rating by its ID.
-     *
-     * @param id The ID of the rating to retrieve.
-     * @return The Rating entity if found, or null if not found.
-     * @author Kévin
-     *
-     */
-    @GetMapping("/{id}")
-    public Rating getRatingById(@PathVariable Long id) {
-        return ratingService.getRatingById(id);
-    }
+  /**
+   * Retrieves a specific rating by its ID.
+   *
+   * @param id The ID of the rating to retrieve.
+   * @return The Rating entity if found, or null if not found.
+   * @author Kévin
+   *
+   */
+  @GetMapping("/{id}")
+  public Rating getRatingById(@PathVariable Long id) {
+    return ratingService.getRatingById(id);
+  }
 
-    @PutMapping("/{id}")
-    public Rating updateRating(@PathVariable Long id, @RequestBody RatingSchema ratingRequest) {
-        return ratingService.updateRating(id, ratingRequest.getRating(), ratingRequest.getFoodOutletId());
-    }
+  @PutMapping("/{id}")
+  public Rating updateRating(@PathVariable Long id, @RequestBody RatingSchema ratingRequest) {
+    return ratingService.updateRating(id, ratingRequest.getRating(), ratingRequest.getFoodOutletId());
+  }
 
-    @DeleteMapping("/{id}")
-    public void deleteRating(@PathVariable Long id) {
-        ratingService.deleteRating(id);
-    }
+  @DeleteMapping("/{id}")
+  public void deleteRating(@PathVariable Long id) {
+    ratingService.deleteRating(id);
+  }
 
 }
