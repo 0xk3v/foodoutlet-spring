@@ -5,7 +5,6 @@ import java.util.List;
 import jakarta.persistence.*;
 
 import jakarta.validation.constraints.NotEmpty;
-import org.hibernate.validator.constraints.URL;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -32,7 +31,6 @@ public class FoodOutlet {
         @Column(name = "opening_hours")
         private String openingHours;
 
-        @URL
         @Column(name = "image_url")
         private String imageUrl;
 
