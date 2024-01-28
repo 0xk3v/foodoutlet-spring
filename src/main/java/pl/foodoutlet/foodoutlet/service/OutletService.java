@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pl.foodoutlet.foodoutlet.model.FoodOutlet;
-import pl.foodoutlet.foodoutlet.repository.FoodOutletRepo;
+import pl.foodoutlet.foodoutlet.repository.OutletRepo;
 
 @Service
 public class OutletService {
 
     @Autowired
-    public FoodOutletRepo outletRepo;
+    public OutletRepo outletRepo;
 
     public FoodOutlet createOutlet(FoodOutlet outlet) {
         return outletRepo.save(outlet);
