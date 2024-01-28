@@ -1,5 +1,6 @@
 package pl.foodoutlet.foodoutlet.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -20,9 +21,9 @@ public class Rating {
     @Column(name = "rating")
     private int rating;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "food_outlet_id")
-    @JsonIgnore
+    @JsonBackReference
     private FoodOutlet foodOutlet;
 
     public Rating() {
