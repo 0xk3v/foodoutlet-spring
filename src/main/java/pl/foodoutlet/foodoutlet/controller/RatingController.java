@@ -26,8 +26,8 @@ import pl.foodoutlet.foodoutlet.service.RatingService;
  *
  */
 
-@CrossOrigin(origins = "http://localhost:5173/")
 @RestController
+@CrossOrigin(origins = "http://localhost:5173/")
 @RequestMapping("/api/ratings")
 public class RatingController {
 
