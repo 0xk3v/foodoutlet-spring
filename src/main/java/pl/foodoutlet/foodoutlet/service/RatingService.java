@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import pl.foodoutlet.foodoutlet.model.FoodOutlet;
 import pl.foodoutlet.foodoutlet.model.Rating;
-import pl.foodoutlet.foodoutlet.repository.FoodOutletRepo;
+import pl.foodoutlet.foodoutlet.repository.OutletRepo;
 import pl.foodoutlet.foodoutlet.repository.RatingRepo;
 
 /**
@@ -25,7 +25,7 @@ public class RatingService {
     public RatingRepo ratingRepo;
 
     @Autowired
-    public FoodOutletRepo outletRepo;
+    public OutletRepo outletRepo;
 
     public List<Rating> getAllRatings() {
         return ratingRepo.findAll();
