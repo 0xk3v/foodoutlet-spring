@@ -23,6 +23,13 @@ import pl.foodoutlet.foodoutlet.model.Rating;
 import pl.foodoutlet.foodoutlet.schema.RatingSchema;
 import pl.foodoutlet.foodoutlet.service.RatingService;
 
+
+/**
+ * Tests for Rating Controller, making sure it works as inteneded
+ *
+ * @author Raymond
+ *
+ */
 @WebMvcTest(RatingController.class)
 public class RatingControllerTests {
 

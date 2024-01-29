@@ -17,6 +17,12 @@ import pl.foodoutlet.foodoutlet.controller.OutletController;
 import pl.foodoutlet.foodoutlet.model.FoodOutlet;
 import pl.foodoutlet.foodoutlet.service.OutletService;
 
+/**
+ * Tests for Outlet Controller, making sure it works as inteneded
+ *
+ * @author Raymond
+ *
+ */
 @WebMvcTest(OutletController.class)
 public class OutletControllerTests {
 

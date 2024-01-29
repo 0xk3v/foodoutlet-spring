@@ -12,7 +12,7 @@ import pl.foodoutlet.foodoutlet.repository.OutletRepo;
  * Service class for managing Food Outlets in the Food Outlet Rating System.
  * Provides business logic for CRUD operations on Food Outlets.
  *
- * @author Kévin
+ * @author Kevin
  * @version 1.0
  * 
  */

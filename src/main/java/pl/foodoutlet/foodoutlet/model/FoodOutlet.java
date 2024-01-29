@@ -15,6 +15,12 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 
+/**
+ * Creates a schema for Request Body object used by Outlet Controller
+ *
+ * @author Raymond
+ *
+ */
 @Entity
 @Table(name = "food_outlet")
 public class FoodOutlet {
