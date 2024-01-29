@@ -24,8 +24,8 @@ import pl.foodoutlet.foodoutlet.service.OutletService;
  * @version 1.0
  * 
  */
-@CrossOrigin(origins = "http://localhost:5173/") // Allowing cross-origin requests from http://localhost:5173/
 @RestController
+@CrossOrigin(origins = "http://localhost:5173/") // Allowing cross-origin requests from http://localhost:5173/
 @RequestMapping("/api/outlets")
 public class OutletController {
 
