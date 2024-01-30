@@ -1,8 +1,10 @@
 package pl.foodoutlet.foodoutlet.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import pl.foodoutlet.foodoutlet.model.User;
 import pl.foodoutlet.foodoutlet.repository.UserRepo;
@@ -58,7 +60,8 @@ public class AuthService {
             if (passwordVerify) {
                 return signingUser;
             } else {
-                return null;
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "user not found");
             }
 
         } catch (Exception e) {
