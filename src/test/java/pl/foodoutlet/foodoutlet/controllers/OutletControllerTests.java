@@ -1,21 +1,24 @@
 package pl.foodoutlet.foodoutlet.controllers;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import pl.foodoutlet.foodoutlet.controller.OutletController;
 import pl.foodoutlet.foodoutlet.model.FoodOutlet;
 import pl.foodoutlet.foodoutlet.service.OutletService;
+
+import static org.mockito.ArgumentMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+
+import java.util.Arrays;
 
 /**
  * Tests for Outlet Controller, making sure it works as inteneded
@@ -56,5 +59,49 @@ public class OutletControllerTests {
                 .andExpect(jsonPath("$.name").value("Takeaway"));
     }
 
-    // Add more tests for other FoodOutletController endpoints
+    @Test
+    public void testCreateFoodOutlet() throws Exception {
+        FoodOutlet newFoodOutlet = new FoodOutlet("New Outlet", "789 Elm St", "Mexican", "12 PM - 9 PM");
+
+        Mockito.when(outletService.createOutlet(Mockito.any(FoodOutlet.class))).thenReturn(newFoodOutlet);
+
+        mockMvc.perform(post("/api/outlets")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(newFoodOutlet)))
+                .andExpect(status().isCreated())
+                .andExpect(content().json(asJsonString(newFoodOutlet)));
+    }
+
+    @Test
+    public void testUpdateFoodOutlet() throws Exception {
+        Long outletId = 1L;
+        FoodOutlet updatedFoodOutlet = new FoodOutlet("Updated Outlet", "123 Maple St", "Indian", "10 AM - 8 PM");
+
+        Mockito.when(outletService.updateOutlet(eq(outletId), any(FoodOutlet.class))).thenReturn(updatedFoodOutlet);
+
+        mockMvc.perform(put("/api/outlets/{id}", outletId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(updatedFoodOutlet)))
+                .andExpect(status().isOk())
+                .andExpect(content().json(asJsonString(updatedFoodOutlet)));
+    }
+
+    @Test
+    public void testDeleteFoodOutlet() throws Exception {
+        Long outletId = 1L;
+
+        Mockito.doNothing().when(outletService).deleteOutlet(eq(outletId));
+        mockMvc.perform(delete("/api/outlets/{id}", outletId))
+                .andExpect(status().is2xxSuccessful());
+    }
+
+    // Helper method to convert objects to JSON string
+    private static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
